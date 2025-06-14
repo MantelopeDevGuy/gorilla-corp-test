@@ -1,1 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suggestions - Gorilla Corp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+    section {
+      padding: 2em;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #f9f9f9;
+      padding: 1em;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5em;
+      font-weight: bold;
+    }
+    select, textarea, button {
+      width: 100%;
+      margin-bottom: 1em;
+      padding: 0.5em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #333;
+    }
+    nav ul li {
+      margin: 0 1em;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Gorilla Corp</h1>
+        <nav>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#support">Support</a></li>
+            <li><a href="#video-suggestions">Suggestions</a></li>
+            <li><a href="#jobs">Jobs</a></li>
+          </ul>
+        </nav>
+      </header>
 
+  <section>
+    <form action="mailto:paterson.gooley@gmail.com" method="post" enctype="text/plain">
+      <label for="suggestion-type">Select Suggestion Type:</label>
+      <select id="suggestion-type" name="video-type">
+        <option value="video">Video</option>
+        <option value="server">Server</option>
+      </select>
+
+      <label for="priority">Select Priority Level:</label>
+      <select id="priority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">high</option>
+      </select>
+
+      <label for="description">Describe Your Idea:</label>
+      <textarea id="description" name="description" rows="5" placeholder="Write your suggestion here..."></textarea>
+
+      <button type="submit">Submit Suggestion</button>
+    </form>
+  </section>
+</body>
+</html>
