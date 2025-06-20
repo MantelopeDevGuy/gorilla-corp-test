@@ -15,9 +15,9 @@
     }
     header {
       background-color: #575757;
-      color: #fff;
+      display: flex;
+      align-items: center;
       padding: 1em;
-      text-align: center;
     }
     nav ul {
       list-style: none;
@@ -25,7 +25,6 @@
       margin: 0;
       display: flex;
       justify-content: center;
-      background-color: #575757;
     }
     nav ul li {
       margin: 0 1em;
@@ -59,19 +58,18 @@
     h1 {
       font-family: 'Orbitron', sans-serif;
       color: #fff;
+      margin: 0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Gorilla Corp</h1>
+  <header style="background-color: #575757; display: flex; align-items: center; padding: 2em;">
+    <a href="#home" style="margin-right: auto;">
+      <img src="GCLogoV2.png" alt="Gorilla Corp Logo" style="height: 50px;">
+    </a>
+    <h1 style="color: white; font-family: 'Orbitron', sans-serif; margin: 0;">Gorilla Corp</h1>
     <nav>
-      <ul style="display: flex; align-items: center; list-style: none; padding: 0; margin: 0; background-color: #575757;">
-        <li style="margin-right: auto;">
-          <a href="#home">
-            <img src="GCLogoV2.png  " alt="Gorilla Corp Logo" style="height: 100px;">
-          </a>
-        </li>
+      <ul style="display: flex; align-items: center; list-style: none; padding: 0; margin: 0;">
         <li><a href="index.html" style="color: white; text-decoration: none; margin: 0 1em;">Home</a></li>
         <li><a href="#support" style="color: white; text-decoration: none; margin: 0 1em;">Support</a></li>
         <li><a href="suggestions.html" style="color: white; text-decoration: none; margin: 0 1em;">Suggestions</a></li>
