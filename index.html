@@ -1,109 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gorilla Corp</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #333;
-      display: flex;
-      align-items: center;
-      padding: 1em;
-    }
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-    }
-    nav ul li {
-      margin: 0 1em;
-    }
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-family: 'Orbitron', sans-serif;
-    }
-    nav {
-      background-color: #333;
-    }
-    section {
-      padding: 2em;
-    }
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 2em;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    footer p {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      color: #6c6c6c;
-    }
-    p {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2em;
-      color: #333;
-    }
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      color: #333;
-    }
-    h1 {
-      font-family: 'Orbitron', sans-serif;
-      color: #fff;
-      margin: 0;
-    }
-  </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=VT323&family=Creepster&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GORILLA CORP | CLASSIFIED</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0d0d0d;
+            --bg-darker: #080808;
+            --text-primary: #00ff00;
+            --text-secondary: #888888;
+            --text-warning: #ff0000;
+            --text-old: #d4af37;
+            --border-color: #333333;
+            --glitch-color-1: #ff00ff;
+            --glitch-color-2: #00ffff;
+        }
+
+        body {
+            font-family: 'VT323', monospace;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.4;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        /* Old CRT screen effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 3px,
+                    rgba(0, 255, 0, 0.03) 3px,
+                    rgba(0, 255, 0, 0.03) 6px
+                );
+            pointer-events: none;
+            z-index: 1000;
+            animation: flicker 0.15s infinite linear alternate;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            100% { opacity: 0.96; }
+        }
+
+        /* Static noise overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><filter id="noise"><feTurbulence baseFrequency="0.9" numOctaves="1" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="discrete" tableValues="0 0.02 0 0.04 0"/></feComponentTransfer></filter></defs><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.4"/></svg>') repeat;
+            pointer-events: none;
+            z-index: 999;
+            animation: static-noise 0.2s infinite;
+        }
+
+        @keyframes static-noise {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-1px, 1px); }
+            20% { transform: translate(1px, 0px); }
+            30% { transform: translate(0px, -1px); }
+            40% { transform: translate(-1px, -1px); }
+            50% { transform: translate(1px, 1px); }
+            60% { transform: translate(0px, 1px); }
+            70% { transform: translate(-1px, 0px); }
+            80% { transform: translate(1px, -1px); }
+            90% { transform: translate(0px, 0px); }
+            100% { transform: translate(-1px, 1px); }
+        }
+
+        /* Header */
+        header {
+            background: rgba(13, 13, 13, 0.95);
+            border-bottom: 2px solid var(--text-primary);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 998;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-glitch {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-darker);
+            border: 2px solid var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            position: relative;
+            animation: logo-glitch 3s infinite;
+        }
+
+        @keyframes logo-glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            10% { transform: translate(-2px, 2px); color: var(--glitch-color-1); }
+            20% { transform: translate(2px, -2px); color: var(--glitch-color-2); }
+            30% { transform: translate(-2px, -2px); color: var(--text-primary); }
+        }
+
+        .company-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--text-primary);
+            animation: text-flicker 2s infinite alternate;
+        }
+
+        @keyframes text-flicker {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.8; }
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+            text-shadow: 0 0 5px var(--text-primary);
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        /* Main content */
+        main {
+            margin-top: 100px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .terminal-section {
+            background: var(--bg-darker);
+            border: 2px solid var(--text-primary);
+            margin: 2rem 0;
+            padding: 1.5rem;
+            position: relative;
+            box-shadow: 
+                inset 0 0 20px rgba(0, 255, 0, 0.1),
+                0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: var(--text-warning); }
+        .dot.yellow { background: var(--text-old); }
+        .dot.green { background: var(--text-primary); }
+
+        .terminal-title {
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-left: 1rem;
+        }
+
+        .classified-banner {
+            background: var(--text-warning);
+            color: var(--bg-dark);
+            text-align: center;
+            padding: 0.5rem;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 2rem 0;
+            animation: warning-blink 1s infinite;
+            border: 3px solid var(--text-warning);
+        }
+
+        @keyframes warning-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.7; }
+        }
+
+        .typewriter {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+
+        .typewriter::after {
+            content: '█';
+            animation: cursor-blink 1s infinite;
+        }
+
+        @keyframes cursor-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .glitch-text {
+            position: relative;
+            color: var(--text-primary);
+            font-family: 'VT323', monospace;
+            font-size: 1.4rem;
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            animation: glitch-anim 0.3s infinite linear alternate-reverse;
+            color: var(--glitch-color-1);
+            z-index: -1;
+        }
+
+        .glitch-text::after {
+            animation: glitch-anim2 0.3s infinite linear alternate-reverse;
+            color: var(--glitch-color-2);
+            z-index: -2;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
+            5% { clip: rect(12px, 9999px, 59px, 0); transform: skew(0.1deg); }
+            10% { clip: rect(48px, 9999px, 29px, 0); transform: skew(0.8deg); }
+            15% { clip: rect(42px, 9999px, 73px, 0); transform: skew(0.9deg); }
+            20% { clip: rect(63px, 9999px, 27px, 0); transform: skew(0.4deg); }
+            25% { clip: rect(34px, 9999px, 55px, 0); transform: skew(0.2deg); }
+            30% { clip: rect(86px, 9999px, 73px, 0); transform: skew(0.8deg); }
+            35% { clip: rect(20px, 9999px, 20px, 0); transform: skew(1deg); }
+            40% { clip: rect(26px, 9999px, 60px, 0); transform: skew(0.6deg); }
+            45% { clip: rect(25px, 9999px, 66px, 0); transform: skew(0.1deg); }
+            50% { clip: rect(57px, 9999px, 98px, 0); transform: skew(0.8deg); }
+            55% { clip: rect(5px, 9999px, 46px, 0); transform: skew(0.7deg); }
+            60% { clip: rect(82px, 9999px, 31px, 0); transform: skew(0.9deg); }
+            65% { clip: rect(54px, 9999px, 27px, 0); transform: skew(0.2deg); }
+            70% { clip: rect(28px, 9999px, 99px, 0); transform: skew(0.4deg); }
+            75% { clip: rect(45px, 9999px, 69px, 0); transform: skew(0.6deg); }
+            80% { clip: rect(23px, 9999px, 85px, 0); transform: skew(-0.2deg); }
+            85% { clip: rect(54px, 9999px, 84px, 0); transform: skew(0.8deg); }
+            90% { clip: rect(45px, 9999px, 47px, 0); transform: skew(-0.3deg); }
+            95% { clip: rect(37px, 9999px, 20px, 0); transform: skew(0.4deg); }
+            100% { clip: rect(4px, 9999px, 91px, 0); transform: skew(-0.2deg); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 119px, 0); transform: skew(0.8deg); }
+            5% { clip: rect(52px, 9999px, 33px, 0); transform: skew(0.9deg); }
+            10% { clip: rect(79px, 9999px, 106px, 0); transform: skew(0.3deg); }
+            15% { clip: rect(17px, 9999px, 37px, 0); transform: skew(0.1deg); }
+            20% { clip: rect(26px, 9999px, 40px, 0); transform: skew(0.2deg); }
+            25% { clip: rect(40px, 9999px, 80px, 0); transform: skew(0.7deg); }
+            30% { clip: rect(59px, 9999px, 50px, 0); transform: skew(-0.1deg); }
+            35% { clip: rect(41px, 9999px, 64px, 0); transform: skew(0.4deg); }
+            40% { clip: rect(2px, 9999px, 81px, 0); transform: skew(0.5deg); }
+            45% { clip: rect(66px, 9999px, 38px, 0); transform: skew(0.3deg); }
+            50% { clip: rect(86px, 9999px, 40px, 0); transform: skew(0.6deg); }
+            55% { clip: rect(43px, 9999px, 49px, 0); transform: skew(0.4deg); }
+            60% { clip: rect(9px, 9999px, 74px, 0); transform: skew(0.8deg); }
+            65% { clip: rect(56px, 9999px, 90px, 0); transform: skew(0.1deg); }
+            70% { clip: rect(88px, 9999px, 98px, 0); transform: skew(0.9deg); }
+            75% { clip: rect(13px, 9999px, 24px, 0); transform: skew(-0.2deg); }
+            80% { clip: rect(87px, 9999px, 69px, 0); transform: skew(0.3deg); }
+            85% { clip: rect(47px, 9999px, 98px, 0); transform: skew(0.7deg); }
+            90% { clip: rect(99px, 9999px, 110px, 0); transform: skew(-0.1deg); }
+            95% { clip: rect(73px, 9999px, 95px, 0); transform: skew(0.5deg); }
+            100% { clip: rect(78px, 9999px, 14px, 0); transform: skew(0.2deg); }
+        }
+
+        @keyframes glitch-skew {
+            0% { transform: skew(1deg); }
+            10% { transform: skew(-2deg); }
+            20% { transform: skew(0deg); }
+            30% { transform: skew(1deg); }
+            40% { transform: skew(0deg); }
+            50% { transform: skew(-1deg); }
+            60% { transform: skew(0deg); }
+            70% { transform: skew(-2deg); }
+            80% { transform: skew(0deg); }
+            90% { transform: skew(2deg); }
+            100% { transform: skew(1deg); }
+        }
+
+        .warning-text {
+            color: var(--text-warning);
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--text-warning);
+        }
+
+        .old-document {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--text-old);
+            color: var(--text-old);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'VT323', monospace;
+            position: relative;
+        }
+
+        .old-document::before {
+            content: "DECLASSIFIED - 19██";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: var(--bg-dark);
+            padding: 0 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-old);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            border-top: 2px solid var(--text-primary);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        footer p {
+            font-family: 'VT323', monospace;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .typewriter, .glitch-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 255, 0, 0.8);
+        }
+    </style>
 </head>
 <body>
-  <header style="background-color: #333; display: flex; align-items: center; padding: 2em;">
-    <a href="#home" style="margin-right: auto;">
-      <img src="GCLogoV2.png" alt="Gorilla Corp Logo" style="height: 50px;">
-    </a>
-    <h1 style="color: white; font-family: 'Orbitron', sans-serif; margin: 0;">Gorilla Corp</h1>
-    <nav>
-      <ul style="display: flex; align-items: center; list-style: none; padding: 0; margin: 0;">
-        <li><a href="index.html" style="color: white; text-decoration: none; margin: 0 1em;">Home</a></li>
-        <li><a href="#support" style="color: white; text-decoration: none; margin: 0 1em;">Support</a></li>
-        <li><a href="suggestions.html" style="color: white; text-decoration: none; margin: 0 1em;">Suggestions</a></li>
-        <li><a href="jobs.html" style="color: white; text-decoration: none; margin: 0 1em;">Jobs</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-glitch">GC</div>
+                <h1 class="company-title">GORILLA CORP</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#operations">OPERATIONS</a></li>
+                    <li><a href="#recruitment">RECRUITMENT</a></li>
+                    <li><a href="#archives">ARCHIVES</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <section id="jobs">
-    <h2>What we do!</h2>
-    <p>Gorilla Corp protects all monkeys from anomalies entities making it so the Secret Service has to cover up less mysterious deaths. We also do research into the stuff we kill working to develop our immortally serum to creat an unkillable army to take out the unholy of the outside world.</p>
-  </section>
+    <main>
+        <div class="classified-banner">
+            ⚠ CLASSIFIED MATERIAL - LEVEL 5 CLEARANCE REQUIRED ⚠
+        </div>
 
-  <section id="video-suggestions">
-    <h2>How can you join?</h2>
-    <p>Have ideas for analog horror videos? Share them with us!</p>
-  </section>
+        <div class="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-title">GORILLA_CORP_MAINFRAME.EXE</div>
+            </div>
+            <div class="glitch-text" data-text="OPERATIONAL DIRECTIVE">OPERATIONAL DIRECTIVE</div>
+            <div class="typewriter">
+                > MISSION PARAMETERS: Gorilla Corp operates under the guise of anomaly containment and research. Our primary directive involves the protection of primate subjects from [REDACTED] entities. Secondary objectives include development of Project IMMORTALIS - a serum designed to create enhanced operatives capable of confronting threats beyond conventional understanding.
+            </div>
+        </div>
 
-  <section id="support">
-    <h2>View our work!</h2>
-    <p>Youtube: </p>
-    <p></p>
-  </section>
+        <div class="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-title">RECRUITMENT_PROTOCOL.EXE</div>
+            </div>
+            <div class="glitch-text" data-text="PERSONNEL ACQUISITION">PERSONNEL ACQUISITION</div>
+            <div class="typewriter">
+                > RECRUITMENT STATUS: ACTIVE<br>
+                > SEEKING: Individuals with experience in analog horror production, anomalous research documentation, and [DATA EXPUNGED] containment procedures.<br>
+                > <span class="warning-text">WARNING: All personnel must undergo psychological evaluation and memory conditioning.</span>
+            </div>
+            <div class="old-document">
+                INTERNAL MEMO - Do you have ideas for analog horror videos? Your creative vision could be exactly what we need for our "public information campaigns." Submit your concepts through secure channels.
+            </div>
+        </div>
 
-  <footer>
-    <p>&copy; 2025 Paterson Gooley</p>
-  </footer>
+        <div class="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="terminal-title">MEDIA_ARCHIVE.EXE</div>
+            </div>
+            <div class="glitch-text" data-text="PUBLIC DOCUMENTATION">PUBLIC DOCUMENTATION</div>
+            <div class="typewriter">
+                > EXTERNAL COMMUNICATIONS: Our work is documented through various media channels to maintain public awareness while concealing true operational scope.<br>
+                > PRIMARY CHANNEL: [YOUTUBE_LINK_ENCRYPTED]<br>
+                > <span class="warning-text">All footage released to public has been sanitized and approved by the Gorilla Secret Service.</span>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 [REDACTED] - GORILLA CORP CLASSIFICATION LEVEL: ████████</p>
+        <p>Paterson Gooley - Lead Researcher, Anomalous Media Division</p>
+    </footer>
+
+    <script>
+        // Random screen glitches
+        setInterval(() => {
+            if (Math.random() < 0.05) {
+                document.body.style.transform = `translate(${Math.random() * 4 - 2}px, ${Math.random() * 4 - 2}px)`;
+                setTimeout(() => {
+                    document.body.style.transform = 'translate(0, 0)';
+                }, 100);
+            }
+        }, 1000);
+
+        // Random text corruption
+        const corruptableTexts = document.querySelectorAll('.typewriter');
+        setInterval(() => {
+            if (Math.random() < 0.03) {
+                const element = corruptableTexts[Math.floor(Math.random() * corruptableTexts.length)];
+                const originalText = element.textContent;
+                const corruptedText = originalText.split('').map(char => 
+                    Math.random() < 0.1 ? String.fromCharCode(33 + Math.floor(Math.random() * 94)) : char
+                ).join('');
+                element.textContent = corruptedText;
+                setTimeout(() => {
+                    element.textContent = originalText;
+                }, 150);
+            }
+        }, 2000);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
